@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Valentine's Day & Our Love Story</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* ======================
+       Love Section (First Code)
+       ====================== */
+    .love-section {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+      position: relative;
+      transition: all 0.5s;
+    }
+    .love-section .container {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      transition: all 0.5s;
+    }
+    /* Using a 6-point polygon for a heart shape */
+    .love-section .couple-photo {
+      width: 250px;
+      height: 250px;
+      border: 5px solid white;
+      margin: 20px auto;
+      background-image: url("love1.jpg");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 30px rgba(255,255,255,0.5);
+      transition: all 0.5s;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(50% 0%, 90% 35%, 80% 70%, 50% 100%, 20% 70%, 10% 35%);
+    }
+    .love-section .couple-photo::after {
+      content: '❤️';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(255, 20, 147, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4em;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+    .love-section h1,
+    .love-section .message,
+    .love-section button {
+      transition: all 0.5s;
+    }
+    .love-section .hidden {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transform: translateY(20px) !important;
+    }
+    .love-section .love-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+    }
+    .love-section .love-message.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .love-section .heart-storm {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 998;
+    }
+    .love-section .heart {
+      position: absolute;
+      font-size: 40px;
+      animation: heartFloat 3s linear forwards;
+    }
+    .love-section .from-text {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1.2em;
+      color: white;
+      font-family: 'Dancing Script', cursive;
+      opacity: 0.8;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+    }
+    @keyframes heartFloat {
+      0% {
+        opacity: 1;
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+    @keyframes photoPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .love-section .photo-pulse {
+      animation: photoPulse 2s infinite;
+    }
+    .love-section .romantic-text {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      font-size: 2em;
+      color: white;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s;
+    }
+    .love-section .romantic-text.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .love-section button {
+      margin-top: 30px;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      background: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Pacifico', cursive;
+      color: #ff1493;
+    }
+    .love-section button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+    .love-section .love-letter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    /* Button to switch to Flipbook */
+    .love-section .switch-button {
+      margin-top: 20px;
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+
+    /* ======================
+       Flipbook Section (Second Code)
+       ====================== */
+    .flipbook-section {
+      margin: 0;
+      padding: 0;
+      background: #ff99cc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Dancing Script', cursive;
+      position: relative;
+    }
+    .flipbook-section .book-container {
+      position: relative;
+      width: 800px;
+      height: 500px;
+      perspective: 1500px;
+    }
+    .flipbook-section .book {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+    .flipbook-section .page {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: #fff;
+      backface-visibility: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      padding: 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .flipbook-section .page:nth-child(odd) {
+      background: #ffe6f0;
+      right: 0;
+      transform-origin: left center;
+    }
+    .flipbook-section .page:nth-child(even) {
+      background: #ffb3d9;
+      left: 0;
+      transform-origin: right center;
+    }
+    /* Ensure proper stacking order */
+    .flipbook-section .book .page:nth-child(1) {
+      z-index: 4;
+    }
+    .flipbook-section .book .page:nth-child(2) {
+      z-index: 3;
+    }
+    .flipbook-section .book .page:nth-child(3) {
+      z-index: 2;
+    }
+    .flipbook-section .book .page:nth-child(4) {
+      z-index: 1;
+    }
+    .flipbook-section .flipped {
+      transform: rotateY(-180deg);
+    }
+    .flipbook-section .heart {
+      color: #ff3366;
+      font-size: 3em;
+      animation: heartbeat 1s infinite;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    .flipbook-section button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .flipbook-section .cover {
+      background: url("love1.jpg") center/cover;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    /* Decorative credit on every flipbook page */
+    .flipbook-section .page-credit {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      font-family: 'Dancing Script', cursive;
+      color: #ff3366;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- ======================
+       Love Section
+       ====================== -->
+  <div id="loveSection" class="love-section">
+    <div class="container">
+      <h1>Happy Valentine's Day, My Queen! 👑❤️</h1>
+      <div class="couple-photo"></div>
+      <div class="message">
+        To My Eternal Valentine 🌹<br />
+        You're the missing piece to my puzzle 🧩<br />
+        My heart beats only for you 💓<br />
+        Forever Yours, Now and Always 💞
+      </div>
+      <button onclick="createRomanticMoment()">Send Virtual Hugs & Kisses 🤗💋</button>
+      <br />
+      <button class="switch-button" onclick="switchToFlipbook()">Read Our Love Story</button>
+    </div>
+
+    <div class="love-message">My Heart is Always Yours! 💖</div>
+    <div class="romantic-text">Sending Infinite Love Your Way! 💌❤️💞</div>
+    <div class="heart-storm" id="heartStorm"></div>
+    <div class="from-text">With All My Love, Durga Prasad 💝</div>
+    <div class="love-letter" id="loveLetter">
+      <h2>My Dearest Love,</h2>
+      <p>Every moment with you feels like a beautiful dream... 🌙✨</p>
+      <p>
+        You're my sunshine on cloudy days ☀️, my anchor in stormy seas ⚓️
+      </p>
+      <p>
+        Forever grateful for your love ❤️<br />- Your Loving Partner
+      </p>
+      <button onclick="toggleLoveLetter()">Close</button>
+    </div>
+  </div>
+
+  <!-- ======================
+       Flipbook Section
+       ====================== -->
+  <div id="flipbookSection" class="flipbook-section" style="display: none;">
+    <div class="book-container">
+      <div class="book" id="book">
+        <!-- Cover Page -->
+        <div class="page cover" id="page1">
+          <h1>Our Love Story</h1>
+          <div class="heart">❤️</div>
+          <button onclick="flipPage()">Open Book</button>
+          <div class="page-credit">From Durga Prasad</div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page" id="page2">
+          <h2>First Meeting</h2>
+          <p>The day our eyes first met...</p>
+          <img src="love2.jpg" alt="Memory" style="width:200px; border-radius:10px;" />
+          <button onclick="flipPage()">Next</button>
+          <div class="page-credit">From Durga Prasad</div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page" id="page3">
+          <h2>Growing Together</h2>
+          <p>Every moment with you is a treasure...</p>
+          <div class="heart">💞</div>
+          <button onclick="flipPage()">Next</button>
+          <div class="page-credit">From Durga Prasad</div>
+        </div>
+
+        <!-- Last Page -->
+        <div class="page" id="page4">
+          <h2>Forever Yours</h2>
+          <p>Will you be my Valentine...</p>
+          <div class="heart">💌</div>
+          <!-- Changed button text and action -->
+          <button onclick="acceptValentine()">Yes</button>
+          <div class="page-credit">From Durga Prasad</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ======================
+       First Code Scripts
+       ====================== */
+    function createRomanticMoment() {
+      // Hide initial elements
+      document
+        .querySelectorAll(".love-section h1, .love-section .message, .love-section button")
+        .forEach((el) => {
+          el.classList.add("hidden");
+        });
+
+      // Show love messages
+      document.querySelector(".love-section .love-message").classList.add("active");
+      document.querySelector(".love-section .romantic-text").classList.add("active");
+      document.querySelector(".love-section .couple-photo").classList.add("photo-pulse");
+
+      // Create heart storm
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 2 + "s";
+        document.getElementById("heartStorm").appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+      }
+
+      // Show love letter after delay
+      setTimeout(toggleLoveLetter, 2000);
+    }
+
+    function toggleLoveLetter() {
+      const letter = document.getElementById("loveLetter");
+      letter.style.display = letter.style.display === "block" ? "none" : "block";
+    }
+
+    // Switch from Love Section to Flipbook Section
+    function switchToFlipbook() {
+      document.getElementById("loveSection").style.display = "none";
+      document.getElementById("flipbookSection").style.display = "flex";
+    }
+
+    /* ======================
+       Second Code Scripts
+       ====================== */
+    let currentPage = 1;
+    const totalPages = 4;
+
+    function flipPage() {
+      if (currentPage < totalPages) {
+        document.getElementById(`page${currentPage}`).classList.add("flipped");
+        currentPage++;
+        if (currentPage === totalPages) {
+          // Optionally hide buttons on final page if needed
+          // document.querySelectorAll(".flipbook-section button").forEach(
+          //   (btn) => (btn.style.display = "none")
+          // );
+        }
+      }
+    }
+
+    // New function for the "Yes" button on the last page
+    function acceptValentine() {
+      const page4 = document.getElementById("page4");
+      // Hide the button
+      const btn = page4.querySelector("button");
+      if (btn) btn.style.display = "none";
+      // Create and show the acceptance message
+      const acceptance = document.createElement("p");
+      acceptance.style.marginTop = "20px";
+      acceptance.style.fontSize = "1.5em";
+      acceptance.style.color = "#ff3366";
+      acceptance.innerHTML = "Yes, I love you too, my love!";
+      page4.appendChild(acceptance);
+    }
+  </script>
+</body>
+</html>
